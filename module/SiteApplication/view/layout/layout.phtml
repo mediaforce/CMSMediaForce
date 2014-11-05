@@ -1,0 +1,444 @@
+<?php echo $this->doctype(); ?>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <?php echo $this->headTitle('ZF2 '. $this->translate('Cms Media Force'))->setSeparator(' - ')->setAutoEscape(false) ?>
+
+        <?php echo $this->headMeta()
+            ->appendName('viewport', 'width=device-width, initial-scale=1.0')
+            ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+        ; ?>
+
+        <!-- Le styles -->
+        <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
+                        ->prependStylesheet($this->basePath() . '/css/app.css') ?>
+
+        <!-- Scripts -->
+        <?php echo $this->headScript()
+            ->prependFile($this->basePath() . '/bower_components/foundation/js/foundation.js')
+            ->prependFile($this->basePath() . '/js/jquery.min.js')
+            ->prependFile($this->basePath() . '/js/respond.min.js', 'text/javascript', array('conditional' => 'lt IE 9',))
+            ->prependFile($this->basePath() . '/js/html5shiv.js',   'text/javascript', array('conditional' => 'lt IE 9',))
+            
+        ; ?>
+
+    </head>
+    <body>
+
+        <header id="navbar-menu-principal" class="fixed">
+            <nav class="top-bar" data-topbar role="navigation">
+              <!-- Title -->
+              <ul class="title-area">
+                <li class="name"><h1><a href="#">Futura União Assessoria</a></h1></li>
+
+                <!-- Mobile Menu Toggle -->
+                <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+              </ul>
+
+              <!-- Top Bar Section -->
+              <section class="top-bar-section">
+
+                <!-- Top Bar Left Nav Elements -->
+                <ul class="left">
+
+
+                  <!-- Search | has-form wrapper -->
+                  <li class="has-form">
+                    <div class="row collapse">
+                      <div class="large-8 small-9 columns">
+                        <input type="text" placeholder="Procurar no site">
+                      </div>
+                      <div class="large-4 small-3 columns">
+                        <a href="#" class="alert button expand">Ir</a>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="has-form">
+                    <a class="button">Atendimento</a>
+                  </li>
+                </ul>
+
+                <!-- Top Bar Right Nav Elements -->
+                <ul class="right">
+
+                <li><a href="#">Quem Somos</a></li>
+
+                  <!-- Divider -->
+                  <li class="divider"></li>
+
+                  <li class="has-dropdown"><a href="#">Serviços</a>
+                    <ul class="dropdown">
+                      <li><a href="#" data-reveal-id="modal-servicos-apoio-tecn">Apoio Técnico</a></li>
+                      <li><a href="#" data-reveal-id="modal-servicos-apoio-com">Apoio Comercial</a></li>
+                      <li><a href="#" data-reveal-id="modal-servicos-apoio-jur">Apoio Jurídico</a></li>
+                      <li><a href="#" data-reveal-id="modal-servicos-apoio-sin">Apoio Sinistros</a></li>
+                      <li><a href="#" data-reveal-id="modal-servicos-apoio-resseg">Apoio Resseguros</a></li>
+                    </ul>
+                  </li>
+
+                  <li class="divider"></li>
+
+                  <li class="has-dropdown"><a href="#">Produtos</a>
+                    <ul class="dropdown">
+
+                      <li class="has-dropdown"><a href="#"  data-reveal-id="modal-produtos-riscos-fin">Riscos Financeiros</a>
+
+                        <!-- Nested Dropdown -->
+                        <ul class="dropdown">
+                          <li><label>Riscos Financeiros</label></li>
+                          <li><a href="#">Seguro Garantia</a></li>
+                          <li><a href="#">Fiança Fiscal</a></li>
+                        </ul>
+                      </li>
+
+                      <li class="has-dropdown"><a href="#">Riscos Patrimoniais & Responsabilidades</a>
+
+                        <!-- Nested Dropdown -->
+                        <ul class="dropdown">
+                          <li><label>Riscos Patrimoniais & Responsabilidades</label></li>
+                          <li><a href="#"  data-reveal-id="modal-produtos-riscos-patri-riscos-engenharia">Responsabilidade de engenharia</a></li>
+
+                          <li class="has-dropdown"><a href="#"  data-reveal-id="modal-produtos-riscos-patri-resp-civil">Responsabilidade Civil</a>
+                            <ul class="dropdown">
+                                <li><label>Responsabilidade Civil</label></li>
+                                <li><a href="#">Responsabilidade Civil Geral</a></li>
+                                <li><a href="#">Responsabilidade Civil Eventos</a></li>
+                                <li><a href="#">RS Profissional</a></li>
+                                <li><a href="#">D & O</a></li>
+                                <li><a href="#">E & O</a></li>
+                            </ul>
+                          </li>
+
+                          <li class="has-dropdown"><a href="#"  data-reveal-id="modal-produtos-riscos-patri-riscos-diver">Riscos Diversos</a>
+                            <ul class="dropdown">
+                                <li><label>Riscos Diversos</label></li>
+                                <li><a href="#">Equipamentos</a></li>
+                                <li><a href="#">Benfeitorias</a></li>
+                            </ul>
+                          </li>
+
+                          
+
+                        </ul>
+                      </li>
+
+                      <li class="has-dropdown"><a href="#" data-reveal-id="modal-produtos-transportes">Transportes</a>
+                        <ul class="dropdown">
+                            <li><label>Transportes</label></li>
+                            <li><a href="#">Transporte Nacional</a></li>
+                            <li><a href="#">Transporte Internacional</a></li>
+                            <li><a href="#">Responsabilidade Civil do Transportador Rodoviário de Carga</a></li>
+                            <li><a href="#">Responsabilidade Civil por Dervio de carga</a></li>
+                            <li><a href="#">Responsabilidade Civil do Transportador Aéreo de Carga</a></li>
+                            <li><a href="#">Responsabilidade Civil do Transportador de Viagem Internacional</a></li>
+                        </ul>
+                      </li>
+
+                    </ul>
+                  </li>
+
+                  <li class="divider"></li>
+
+                  <!-- Anchor -->
+                  <li><a href="#">FAQ/Glossário</a></li>
+                  <li class="divider"></li>
+
+                  <li><a href="#">Para Corretores</a></li>
+                  <li class="divider"></li>
+
+                  <!-- Button -->
+                  <li class="has-form show-for-large-up">
+                    <a href="/admin" class="button">Acesso Restrito</a>
+                  </li>
+                </ul>
+              </section>
+            </nav>
+        </header>
+
+
+        <aside class="fixed">
+        </aside>
+
+        <div id="main-content">
+            <?php echo $this->content; ?>
+        </div>
+
+        <footer id="rodapte-principal">
+        
+        </footer>
+
+        <!-- Janelas Modais INÍCIO -->
+        <!-- Janelas Modais de Serviços -->
+        <div id="modal-servicos-apoio-tecn" class="reveal-modal" data-reveal>
+          <h2>Apoio Técnico</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam in debitis maiores ad, corrupti facere est doloribus inventore odit quasi, nihil atque beatae veniam velit sit ratione dignissimos! Aliquam quisquam deserunt voluptatibus eum, praesentium commodi debitis doloribus dolores vero esse voluptates molestias. Corporis adipisci voluptatum nam, suscipit ab molestiae aperiam harum, incidunt odio doloribus, aut? Non deleniti qui et aspernatur corrupti nesciunt, quisquam sunt, distinctio pariatur, at tempore quo. Illum culpa ut facilis eos impedit, quibusdam, enim officiis repellendus placeat reprehenderit ab. Veritatis, dolore, nihil. At aliquid, neque sequi iusto, eligendi quisquam maxime, provident rem facilis eos illo est repellat.</p>
+          <a class="close-reveal-modal">&#215;</a>
+        </div>
+
+        <div id="modal-servicos-apoio-com" class="reveal-modal" data-reveal>
+          <h2>Apoio Comercial</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam in debitis maiores ad, corrupti facere est doloribus inventore odit quasi, nihil atque beatae veniam velit sit ratione dignissimos! Aliquam quisquam deserunt voluptatibus eum, praesentium commodi debitis doloribus dolores vero esse voluptates molestias. Corporis adipisci voluptatum nam, suscipit ab molestiae aperiam harum, incidunt odio doloribus, aut? Non deleniti qui et aspernatur corrupti nesciunt, quisquam sunt, distinctio pariatur, at tempore quo. Illum culpa ut facilis eos impedit, quibusdam, enim officiis repellendus placeat reprehenderit ab. Veritatis, dolore, nihil. At aliquid, neque sequi iusto, eligendi quisquam maxime, provident rem facilis eos illo est repellat.</p>
+          <a class="close-reveal-modal">&#215;</a>
+        </div>
+
+        <div id="modal-servicos-apoio-jur" class="reveal-modal" data-reveal>
+          <h2>Apoio Jurídico</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam in debitis maiores ad, corrupti facere est doloribus inventore odit quasi, nihil atque beatae veniam velit sit ratione dignissimos! Aliquam quisquam deserunt voluptatibus eum, praesentium commodi debitis doloribus dolores vero esse voluptates molestias. Corporis adipisci voluptatum nam, suscipit ab molestiae aperiam harum, incidunt odio doloribus, aut? Non deleniti qui et aspernatur corrupti nesciunt, quisquam sunt, distinctio pariatur, at tempore quo. Illum culpa ut facilis eos impedit, quibusdam, enim officiis repellendus placeat reprehenderit ab. Veritatis, dolore, nihil. At aliquid, neque sequi iusto, eligendi quisquam maxime, provident rem facilis eos illo est repellat.</p>
+          <a class="close-reveal-modal">&#215;</a>
+        </div>
+
+        <div id="modal-servicos-apoio-sin" class="reveal-modal" data-reveal>
+          <h2>Apoio Sinistros</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam in debitis maiores ad, corrupti facere est doloribus inventore odit quasi, nihil atque beatae veniam velit sit ratione dignissimos! Aliquam quisquam deserunt voluptatibus eum, praesentium commodi debitis doloribus dolores vero esse voluptates molestias. Corporis adipisci voluptatum nam, suscipit ab molestiae aperiam harum, incidunt odio doloribus, aut? Non deleniti qui et aspernatur corrupti nesciunt, quisquam sunt, distinctio pariatur, at tempore quo. Illum culpa ut facilis eos impedit, quibusdam, enim officiis repellendus placeat reprehenderit ab. Veritatis, dolore, nihil. At aliquid, neque sequi iusto, eligendi quisquam maxime, provident rem facilis eos illo est repellat.</p>
+          <a class="close-reveal-modal">&#215;</a>
+        </div>
+
+        <div id="modal-servicos-apoio-resseg" class="reveal-modal" data-reveal>
+          <h2>Apoio Resseguros</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam in debitis maiores ad, corrupti facere est doloribus inventore odit quasi, nihil atque beatae veniam velit sit ratione dignissimos! Aliquam quisquam deserunt voluptatibus eum, praesentium commodi debitis doloribus dolores vero esse voluptates molestias. Corporis adipisci voluptatum nam, suscipit ab molestiae aperiam harum, incidunt odio doloribus, aut? Non deleniti qui et aspernatur corrupti nesciunt, quisquam sunt, distinctio pariatur, at tempore quo. Illum culpa ut facilis eos impedit, quibusdam, enim officiis repellendus placeat reprehenderit ab. Veritatis, dolore, nihil. At aliquid, neque sequi iusto, eligendi quisquam maxime, provident rem facilis eos illo est repellat.</p>
+          <a class="close-reveal-modal">&#215;</a>
+        </div>
+
+
+        <!-- Janelas Modais de Produtos  -->
+        <div id="modal-produtos-riscos-fin" class="reveal-modal" data-reveal>
+          <h2>Riscos Financeiros</h2>
+
+          <div>
+            TAB [
+              Seguro Garantia [
+                <br>
+
+                [ Finalidade, Coberturas, Como Contratar, Vantagens ]
+
+                <br>
+              
+              ],<br> 
+              Fiança Locatária  [
+                <br>
+
+                [ Finalidade, Coberturas, Como Contratar, Vantagens ]
+
+                <br>
+              
+              ],<br> 
+            ]
+          </div>
+          
+          <a class="close-reveal-modal">&#215;</a>
+        </div>
+
+        <div id="modal-produtos-riscos-patri-riscos-engenharia" class="reveal-modal" data-reveal>
+          <h2>Riscos Patrimoniais & Responsabilidades -> Riscos de Engenharia</h2>
+          <div>
+            Riscos de Engenharia [
+              <br>
+
+              [ Finalidade, Coberturas, Como Contratar, Vantagens ]
+
+              <br>
+            
+            ]
+
+            Riscos Diversos [
+              <br>
+              
+              SUBTABS(vertical) {
+
+                <br>
+                  Responsabilidade Civil Geral [
+                    <br>
+
+                    [ Finalidade, Coberturas, Como Contratar, Vantagens ]
+
+                    <br>
+                  
+                  ], <br>
+                  Responsabilidade Civil Eventos [
+                    <br>
+
+                    [ Finalidade, Coberturas, Como Contratar, Vantagens ]
+
+                    <br>
+                  
+                  ]
+                <br>
+
+              }
+
+              <br>
+            ]
+
+          </div>
+          <a class="close-reveal-modal">&#215;</a>
+        </div>
+
+        <div id="modal-produtos-riscos-patri-resp-civil" class="reveal-modal" data-reveal>
+          <h2>Riscos Patrimoniais & Responsabilidades -> Responsabilidade Civil</h2>
+          
+          <div>
+            Responsabilidade Civil [
+              <br>
+              
+              SUBTABS(vertical) {
+
+                <br>
+                  Responsabilidade Civil Geral [
+                    <br>
+
+                    [ Finalidade, Coberturas, Como Contratar, Vantagens ]
+
+                    <br>
+                  
+                  ], <br>
+                  Responsabilidade Civil Eventos [
+                    <br>
+
+                    [ Finalidade, Coberturas, Como Contratar, Vantagens ]
+
+                    <br>
+                  
+                  ], <br>
+                  RC Profissional [
+                    <br>
+
+                    [ Finalidade, Coberturas, Como Contratar, Vantagens ]
+
+                    <br>
+                  
+                  ], <br>
+                  D & O [
+                    <br>
+
+                    [ Finalidade, Coberturas, Como Contratar, Vantagens ]
+
+                    <br>
+                  
+                  ], <br>
+                  E & O [
+                    <br>
+
+                    [ Finalidade, Coberturas, Como Contratar, Vantagens ]
+
+                    <br>
+                  
+                  ], <br>
+                <br>
+
+              }
+
+              <br>
+            ]
+          </div>
+          
+          <a class="close-reveal-modal">&#215;</a>
+        </div>
+
+        <div id="modal-produtos-riscos-patri-riscos-diver" class="reveal-modal" data-reveal>
+          <h2>Riscos Patrimoniais & Responsabilidades -> Riscos Diversos</h2>
+          
+          <div>
+            Riscos Diversos [
+              <br>
+              
+              SUBTABS(vertical) {
+
+                <br>
+                  Equipamentos [
+                    <br>
+
+                    [ Finalidade, Coberturas, Como Contratar, Vantagens ]
+
+                    <br>
+                  
+                  ], <br>
+                  Benfeitorias [
+                    <br>
+
+                    [ Finalidade, Coberturas, Como Contratar, Vantagens ]
+
+                    <br>
+                  
+                  ], <br>
+              }
+
+              <br>
+            ]
+          </div>
+          
+          <a class="close-reveal-modal">&#215;</a>
+        </div>
+
+        <div id="modal-produtos-transportes" class="reveal-modal" data-reveal>
+          <h2>Transportes</h2>
+
+          <div>
+            TAB [
+              Transporte Nacional [
+                <br>
+
+                [ Finalidade, Coberturas, Como Contratar, Vantagens ]
+
+                <br>
+              
+              ],<br> 
+
+              Transporte Internacional  [
+                <br>
+
+                [ Finalidade, Coberturas, Como Contratar, Vantagens ]
+
+                <br>
+              
+              ],<br> 
+
+              Responsabilidade Civil do Transportador Rodoviário de Carga [
+                <br>
+
+                [ Finalidade, Coberturas, Como Contratar, Vantagens ]
+
+                <br>
+              
+              ],<br> 
+
+              Responsabilidade Civil por Desvio de Carga [
+                <br>
+
+                [ Finalidade, Coberturas, Como Contratar, Vantagens ]
+
+                <br>
+              
+              ],<br> 
+              Responsabilidade Civil do Transportador Aéreo Carga [
+                <br>
+
+                [ Finalidade, Coberturas, Como Contratar, Vantagens ]
+
+                <br>
+              
+              ],<br> 
+              Responsabilidade Civil do Transportador de Viagem Internacional [
+                <br>
+
+                [ Finalidade, Coberturas, Como Contratar, Vantagens ]
+
+                <br>
+              
+              ],<br> 
+            ]
+          </div>
+
+          <a class="close-reveal-modal">&#215;</a>
+        </div>
+
+        <?php echo $this->inlineScript() ?>
+
+      <script>
+        $(document).ready(function () {
+          $(document).foundation();
+        })
+      </script>
+
+    </body>
+</html>
