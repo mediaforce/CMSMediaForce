@@ -26,6 +26,54 @@ class LoadPrivilege extends AbstractFixture implements OrderedFixtureInterface {
                 ->setRole($role1)
                 ->setResource($resource1);        
         $manager->persist($privilege);
+
+        $privilege = new Privilege;
+        $privilege->setNome("Visualizar")
+                ->setRole($role1)
+                ->setResource($resource2);        
+        $manager->persist($privilege);
+
+        $privilege = new Privilege;
+        $privilege->setNome("Visualizar")
+                ->setRole($role1)
+                ->setResource($resource3);        
+        $manager->persist($privilege);
+
+        $privilege = new Privilege;
+        $privilege->setNome("Editar")
+                ->setRole($role1)
+                ->setResource($resource1);        
+        $manager->persist($privilege);
+
+        $privilege = new Privilege;
+        $privilege->setNome("Editar")
+                ->setRole($role1)
+                ->setResource($resource2);        
+        $manager->persist($privilege);
+
+        $privilege = new Privilege;
+        $privilege->setNome("Editar")
+                ->setRole($role1)
+                ->setResource($resource3);        
+        $manager->persist($privilege);
+
+        $privilege = new Privilege;
+        $privilege->setNome("Criar/Excluir")
+                ->setRole($role1)
+                ->setResource($resource1);        
+        $manager->persist($privilege);
+
+        $privilege = new Privilege;
+        $privilege->setNome("Criar/Excluir")
+                ->setRole($role1)
+                ->setResource($resource2);        
+        $manager->persist($privilege);
+
+        $privilege = new Privilege;
+        $privilege->setNome("Criar/Excluir")
+                ->setRole($role1)
+                ->setResource($resource3);        
+        $manager->persist($privilege);
         
         $manager->flush();  
         

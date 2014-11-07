@@ -29,11 +29,16 @@ class ArquivoTexto
     protected $descricao;
 
     /**
+     * @ORM\Column(type="string")
+     * @var string
+     */
+    protected $endereco;
+
+    /**
      * @ORM\OneToOne(targetEntity="CmsMediaForce\Entity\DadosCadConteudo")
      * @ORM\JoinColumn(name="dados_cad_id", referencedColumnName="id")
      */
-    protected $dadosCad;
-    
+    protected $dadosCad; 
     
     public function __construct($options = array())
     {
@@ -98,6 +103,30 @@ class ArquivoTexto
     }
 
     /**
+     * Gets the value of endereco.
+     *
+     * @return string
+     */
+    public function getEndereco()
+    {
+        return $this->endereco;
+    }
+
+    /**
+     * Sets the value of endereco.
+     *
+     * @param string $endereco the endereco
+     *
+     * @return self
+     */
+    protected function setEndereco($endereco)
+    {
+        $this->endereco = $endereco;
+
+        return $this;
+    }
+
+    /**
      * Gets the value of dadosCad.
      *
      * @return mixed
@@ -120,6 +149,7 @@ class ArquivoTexto
 
         return $this;
     }
+
 }
 
 

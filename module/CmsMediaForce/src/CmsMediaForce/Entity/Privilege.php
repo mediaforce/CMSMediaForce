@@ -8,7 +8,8 @@ use Zend\Stdlib\Hydrator;
 /**
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
- * @ORM\Table(name="privileges")
+ * @ORM\Table(name="privileges", uniqueConstraints={
+ *     @ORM\UniqueConstraint(name="role_resource", columns={"role_id", "resource_id", "nome"})})
  * @ORM\Entity(repositoryClass="CmsMediaForce\Entity\PrivilegeRepository")
  */
 
@@ -24,19 +25,19 @@ class Privilege
     
     
     /**
-     * @ORM\OneToOne(targetEntity="CmsMediaForce\Entity\Role")
+     * @ORM\ManyToOne(targetEntity="CmsMediaForce\Entity\Role")
      * @ORM\JoinColumn(name="role_id", referencedColumnName="id")
      */
     protected $role;
     
     /**
-     * @ORM\OneToOne(targetEntity="CmsMediaForce\Entity\Resource")
+     * @ORM\ManyToOne(targetEntity="CmsMediaForce\Entity\Resource")
      * @ORM\JoinColumn(name="resource_id", referencedColumnName="id")
      */
     protected $resource;
     
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="string", length=50)
      * @var string
      */
     protected $nome;

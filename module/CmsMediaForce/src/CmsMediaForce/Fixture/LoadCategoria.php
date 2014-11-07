@@ -12,27 +12,47 @@ class LoadCategoria extends AbstractFixture implements OrderedFixtureInterface {
 
     public function load(ObjectManager $manager) {
 
-        $catArray = array(
+        $catOnlyPost= array(
             'FAQ',
             'Glossário',
-            'Notificações',
-            'Circulares Legias',
-            'Serviços',
-            'Produtos'
         );
 
-        foreach ($catArray as $cat) {
+        $catOnlyFile = array(
+            'Formulários',
+        );
+
+        $catBoth = array(
+            'Circulares',
+            'Notificações',
+        );
+
+        foreach ($catOnlyPost as $cat) {
             $categoria = new Categoria;
-            $categoria->setNome($cat);
+            $categoria->setNome($cat)
+                ->setIsPost(true);
+
             $manager->persist($categoria);
             
         }
-        
-        $categoria = new Categoria;
-            $categoria->setNome('Formulários')
+
+        foreach ($catOnlyFile as $cat) {
+            $categoria = new Categoria;
+            $categoria->setNome($cat)
                 ->setIsFile(true);
-    
-            $manager->persist($categoria);    
+                
+            $manager->persist($categoria);
+            
+        }
+
+        foreach ($catBoth as $cat) {
+            $categoria = new Categoria;
+            $categoria->setNome($cat)
+                ->setIsFile(true)
+                ->setIsPost(true);
+                
+            $manager->persist($categoria);
+            
+        }
 
         $manager->flush();  
     }

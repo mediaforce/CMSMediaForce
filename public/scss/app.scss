@@ -1,6 +1,6 @@
 // Minhas Fonts
-@import url("http://fonts.googleapis.com/css?family=Lato:300,400,700,900");
-@import url("http://fonts.googleapis.com/css?family=Pacifico");
+/*CSS file for fontawesome - an iconfont we will be using. This CSS file imported contains the font-face declaration. More info: http://fortawesome.github.io/Font-Awesome/ */
+@import url(http://thecodeplayer.com/uploads/fonts/fontawesome/css/font-awesome.min.css);
 
 // Minhas Variaveis
 
@@ -66,6 +66,7 @@ INDICE
 	11 - Media Queries
 */
 
+
 /********************* 1 - Globals ********************************/
 
 /********************* 2 - Cabelaçalho ****************************/
@@ -75,12 +76,31 @@ INDICE
 }
 
 /********************* 3 - Estrutura ******************************/
+div.editable {
+	border: solid 2px transparent;
+	padding-left: 15px;
+	padding-right: 15px;
+
+	border-color: #C4C4C4;
+
+	min-height: 50px;
+
+	&::hover {
+		border-color: black;
+	}
+	
+}
 
 /********************* 4 - Rodapé *********************************/
 footer#rodape-principal {
 	background: #0A0079; 
 	height: 200px;
 }
+
+#admin-content {
+ margin-left: 220px;
+}
+
 /********************* 5 - Estilo de T[itulos *********************/
 
 /********************* 6 - Estilo de Texto ************************/
@@ -88,11 +108,57 @@ footer#rodape-principal {
 /********************* 7 - Botões *********************************/
 
 /********************* 8 - Navegação ******************************/
+#admin-menu {
+	width: 220px;
+	margin-top: 45px;
+	background: black;
+
+	height:100vh;
+
+	h3 {
+		font-size: 1.4em;
+		color: white;
+	}
+	
+	a {
+		color: white;
+	}
 
 
+}
+
+.menu-accordion {
+	ul {
+		list-style-type: none;
+		
+		h3 {
+			cursor: pointer;
+		}
+
+		ul {
+			display: none;
+			li {
+				a{
+					display: block;
+				}
+			}
+		}
+
+		li.active ul {
+			display: block;
+		}
+	}
+}
 
 /********************* 9 - Formulários ****************************/
 
 /********************* 10 - Extras/Miscelâneas ********************/
 
 /********************* 11 - Media Queries  ************************/
+
+
+/* Testes */
+
+.content-test {
+	
+}

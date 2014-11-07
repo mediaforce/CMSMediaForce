@@ -29,7 +29,7 @@ class Role
     protected $parent;
     
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="string")
      * @var string
      */
     protected $nome;

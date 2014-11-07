@@ -64,10 +64,10 @@ class Categoria extends \CmsMediaForce\Entity\Categoria implements \Doctrine\ORM
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return array('__isInitialized__', 'id', 'nome', 'parent', 'isFile');
+            return array('__isInitialized__', 'id', 'nome', 'parent', 'isFile', 'isPost');
         }
 
-        return array('__isInitialized__', 'id', 'nome', 'parent', 'isFile');
+        return array('__isInitialized__', 'id', 'nome', 'parent', 'isFile', 'isPost');
     }
 
     /**
@@ -274,6 +274,28 @@ class Categoria extends \CmsMediaForce\Entity\Categoria implements \Doctrine\ORM
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setIsFile', array($isFile));
 
         return parent::setIsFile($isFile);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function isPost()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'isPost', array());
+
+        return parent::isPost();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setIsPost($isPost)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setIsPost', array($isPost));
+
+        return parent::setIsPost($isPost);
     }
 
 }

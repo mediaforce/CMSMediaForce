@@ -20,6 +20,8 @@ abstract class CrudController extends AbstractActionController
     
     
     public function indexAction() {
+
+        
         
         $list = $this->getEm()
                 ->getRepository($this->entity)

@@ -50,7 +50,7 @@ class User
     private $password;
 
     /**
-     * @ORM\OneToOne(targetEntity="CmsMediaForce\Entity\Role")
+     * @ORM\ManyToOne(targetEntity="CmsMediaForce\Entity\Role")
      * @ORM\JoinColumn(name="role_id", referencedColumnName="id")
      */
     private $role;
@@ -222,7 +222,12 @@ class User
 
     public function toArray()
     {
-        return (new Hydrator\ClassMethods())->extract($this);
+        return array(
+            'id' => $this->getId(),
+            'nome' => $this->getNome(),
+            'email' => $this->getEmail(),
+            'role' => $this->getRole()
+        );
     }
 
 }

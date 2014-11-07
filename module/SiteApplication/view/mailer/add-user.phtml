@@ -1,0 +1,10 @@
+Olá <?php echo $this->nome;?>,
+<br />
+<br />
+
+<p>
+    Esse email tem o objetivo de confirmar seu cadastro na Empresa ?.
+    <br />
+    Para ativar sua conta, acesse: <a href="http://<?php echo $this->url('cms-activate', array('key'=>$this->activationKey)); ?>">http://<?php echo $this->url('cms-activate', array('key'=>$this->activationKey)); ?></a> para ativar o seu cadastro.
+    
+</p>

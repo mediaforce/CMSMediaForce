@@ -22,7 +22,6 @@
             ->prependFile($this->basePath() . '/js/html5shiv.js',   'text/javascript', array('conditional' => 'lt IE 9',))
             
         ; ?>
-
     </head>
     <body>
 
@@ -30,7 +29,7 @@
             <nav class="top-bar" data-topbar role="navigation">
               <!-- Title -->
               <ul class="title-area">
-                <li class="name"><h1><a href="#">Futura União Assessoria</a></h1></li>
+                <li class="name"><h1><a href="/">Futura União Assessoria</a></h1></li>
 
                 <!-- Mobile Menu Toggle -->
                 <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
@@ -149,19 +148,102 @@
 
                   <!-- Button -->
                   <li class="has-form show-for-large-up">
-                    <a href="/admin" class="button">Acesso Restrito</a>
+                    <?php 
+
+                    if ($this->UserIdentity('CmsUser')):
+                      $hour =  date('H');
+                      $comprimento = 'Bom dia, ';
+
+                      if ($hour > 11) {
+                        $comprimento = 'Boa tarde, ';
+                      } elseif ($hour > 17) {
+                        $comprimento = 'Boa noite, ';
+                      }
+                      $nome = $this->UserIdentity("CmsUser")->getNome();
+                      $etc = "";
+
+                      if (strlen($nome) > 20) {
+                        $etc = "...";
+                      }
+
+                      echo '<a href="/admin" class="button">', $comprimento, substr($nome, 0, 20), $etc,'</a>';
+                    else:
+                      echo '<a href="/admin" class="button">Acesso Restrito</a>';
+                    endif;
+                    ?>
+                    
                   </li>
+                  <?php if ($this->UserIdentity('CmsUser')): ?>
+                  <li class="has-form show-for-large-up">
+                    <a href="/auth/logout" class="button">Sair</a>
+                  </li>
+                  <?php endif; ?>
                 </ul>
               </section>
             </nav>
         </header>
+        
+        <?php
+        $route = $this->getHelperPluginManager()->getServiceLocator()->get('request')->getUri()->getPath(); 
+        $isAdmin = false;
 
+        if (strpos($route,'/admin') !== false) {
+            $isAdmin = true;
+        }
+        ?>
 
-        <aside class="fixed">
+        <?php if ($isAdmin and $this->UserIdentity('CmsUser')): ?>
+        <aside id="admin-menu" class="fixed">
+          <nav class="menu-accordion">
+            <ul>
+              <li style="display: none">
+                <h3><span class="icon-dashboard"></span>ACL - Permissões</h3>
+                <ul>
+                  <li><a href="/admin/access/roles">Roles</a></li>
+                  <li><a href="/admin/access/resources">Resources</a></li>
+                  <li><a href="/admin/access/privileges">Privileges</a></li>
+                </ul>
+              </li>
+
+              <li>
+                <h3><span class="/admin/content"></span>Conteudo</h3>
+                <ul>
+                  <li><a href="/admin/content/posts">Página</a></li>
+                  <li><a href="/admin/content/arquivostexto">Arquivo</a></li>
+                  <li><a href="/admin/content/links">Links</a></li>
+                  <li><a href="/admin/content/links">Corretor</a></li>
+                </ul>
+              </li>
+
+              <li>
+                <h3><span class="/admin/access/users"></span>Usuários</h3>
+                <ul>
+                  <li><a href="/admin/access/users/index">Listar</a></li>
+                  <li><a href="/admin/access/users/new">Novo</a></li>
+                </ul>
+              </li>
+
+            </ul>
+          </nav>
         </aside>
+        <?php endif; ?>
 
         <div id="main-content">
-            <?php echo $this->content; ?>
+              <?php 
+
+              if ($isAdmin) 
+                echo '<div id="admin-content">';
+
+              ?>
+
+              
+              <?php echo $this->content; ?>
+              
+              <?php
+              if ($isAdmin) 
+                echo '</div>';
+
+              ?>
         </div>
 
         <footer id="rodapte-principal">
@@ -435,9 +517,63 @@
         <?php echo $this->inlineScript() ?>
 
       <script>
+        window.onload = function() {
+            // Listen to the double click event.
+            if ( window.addEventListener )
+                document.body.addEventListener( 'dblclick', onDoubleClick, false );
+            else if ( window.attachEvent )
+                document.body.attachEvent( 'ondblclick', onDoubleClick );
+
+        };
+
+        function onDoubleClick( ev ) {
+            // Get the element which fired the event. This is not necessarily the
+            // element to which the event has been attached.
+            var element = ev.target || ev.srcElement;
+
+            // Find out the div that holds this element.
+            var name;
+
+            do {
+                element = element.parentNode;
+            }
+            while ( element && ( name = element.nodeName.toLowerCase() ) &&
+                ( name != 'div' || element.className.indexOf( 'editable' ) == -1 ) && name != 'body' );
+
+            if ( name == 'div' && element.className.indexOf( 'editable' ) != -1 )
+                replaceDiv( element );
+        }
+
+        var editor;
+
+        function replaceDiv( div ) {
+            if ( editor )
+                editor.destroy();
+
+            editor = CKEDITOR.replace( div );
+        }
+
+
         $(document).ready(function () {
           $(document).foundation();
-        })
+
+          $(".menu-accordion h3").click(function(){
+          
+            $(".menu-accordion ul ul").slideUp();
+            
+            if(!$(this).next().is(":visible")) {
+              $(this).next().slideDown();
+            
+            }
+          })
+
+          $(".menu-accordion ul ul li").click(function(){
+            $(".active").removeClass("active").addClass("inactive");
+            $(this).removeClass("inactive").addClass("active");
+          });
+
+        });
+
       </script>
 
     </body>

@@ -13,17 +13,17 @@ class LoadResource extends AbstractFixture implements OrderedFixtureInterface {
     public function load(ObjectManager $manager) {
         
         $resource = new Resource;
-        $resource->setNome("Formulários");
+        $resource->setNome("postagens");
                 
         $manager->persist($resource);
         
         $resource = new Resource;
-        $resource->setNome("Notificações");
+        $resource->setNome("usuarios");
                 
         $manager->persist($resource);
 
         $resource = new Resource;
-        $resource->setNome("Circulares");
+        $resource->setNome("acl");
                 
         $manager->persist($resource);        
         

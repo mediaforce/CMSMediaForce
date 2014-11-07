@@ -40,7 +40,6 @@ class Post
      */
     protected $dadosCad;
     
-    
     public function __construct($options = array())
     {
 		
@@ -50,7 +49,37 @@ class Post
 
     public function toArray()
     {
-        return (new Hydrator\ClassMethods)->extract($this);
+        $dadosCad = $this->getDadosCad()->toArray();
+
+        return array(
+            'id' => $this->id,
+            'categoria' => $dadosCad['categoria'],
+            'conteudo' => $this->conteudo,
+            'titulo' => $this->titulo,
+            'criado_em' => $dadosCad['created_at'],
+            'atualizado_em' => $dadosCad['updated_at'],
+            'criado_por' => $dadosCad['criado_por'],
+            'expirar' => $dadosCad['is_expired']?"sim":"nao",
+            'expiresAt' => $dadosCad['expira_em'],
+        );
+    }
+
+
+    public function toArrayForIndex()
+    {
+        $dadosCad = $this->getDadosCad()->toArrayForIndex();
+
+        return array(
+            'id' => $this->id,
+            'categoria' => $dadosCad['categoria'],
+            'conteudo' => $this->conteudo,
+            'titulo' => $this->titulo,
+            'criado_em' => $dadosCad['created_at'],
+            'atualizado_em' => $dadosCad['updated_at'],
+            'criado_por' => $dadosCad['criado_por'],
+            'expirar' => $dadosCad['is_expired']?"sim":"nao",
+            'expiresAt' => $dadosCad['expira_em'],
+        );
     }
 
     

@@ -35,10 +35,16 @@ class Categoria
     protected $parent;
     
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=false)
      * @var boolean
      */
     protected $isFile;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=false)
+     * @var boolean
+     */
+    protected $isPost;
     
     
     public function __construct($options = array())
@@ -47,6 +53,7 @@ class Categoria
         (new Hydrator\ClassMethods)->hydrate($options, $this);
 
         $this->isFile = false;
+        $this->isPost = false;
     }
     
 
@@ -154,6 +161,30 @@ class Categoria
     public function setIsFile($isFile)
     {
         $this->isFile = $isFile;
+
+        return $this;
+    }
+
+    /**
+     * Gets the value of isPost.
+     *
+     * @return boolean
+     */
+    public function isPost()
+    {
+        return $this->isPost;
+    }
+
+    /**
+     * Sets the value of isPost.
+     *
+     * @param boolean $isPost the is post
+     *
+     * @return self
+     */
+    public function setIsPost($isPost)
+    {
+        $this->isPost = $isPost;
 
         return $this;
     }

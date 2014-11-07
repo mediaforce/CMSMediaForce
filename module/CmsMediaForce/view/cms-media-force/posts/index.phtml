@@ -1,0 +1,59 @@
+<div class="content-admin">
+
+<h3>Páginas</h3>
+
+    <br />
+
+    <p>
+        <a href="<?php echo $this->url('cms-admin-content/default',array('controller'=>'posts','action'=>'new')); ?>">Nova Página</a>
+    </p>
+
+    <table class="table">
+        <tr>
+            <th>ID</th>
+            <th>Categoria</th>
+            <th>Título</th>
+            <th>Criado Em</th>
+            <th>Atualizado Em</th>
+            <th>Criado Por</th>
+            <th>Expira Em</th>
+            <td>Ação</td>
+        </tr>
+
+        <?php foreach($this->data as $entity): ?>
+
+        <?php $post = $entity->toArrayForIndex(); ?>
+
+        <tr>
+        
+            <td><?php echo $post['id']; ?></td>
+            <td><?php echo $post['categoria']; ?></td>
+            <td><?php echo $post['titulo']; ?></td>
+            <td><?php echo $post['criado_em']->format('Y-m-d-H-i-s'); ?></td>
+            <td><?php echo $post['atualizado_em']->format('Y-m-d-H-i-s'); ?></td>
+            <td><?php echo $post['criado_por']; ?></td>
+            <td>
+                <?php 
+                if ($post['expirar']):
+                    echo $post['expiresAt']->format('Y-m-d-H-i-s');
+                else:
+                    echo 'Não Expira';
+                endif;
+                 ?>
+                
+            </td>
+            <td>
+                <a href="<?php echo $this->url('cms-admin-content/default',
+                        array('controller'=>'posts','action'=>'edit','id'=> $post['id'] ));?>">Editar</a>
+                
+                <a href="<?php echo $this->url('cms-admin-content/default',
+                        array('controller'=>'posts','action'=>'delete','id'=> $post['id'] ));?>">Delete</a>
+                
+            </td>
+        </tr>
+        <?php endforeach; ?>
+    </table>
+
+    <?php echo $this->paginationControl($this->data,'Sliding','partials/paginator'); ?>
+
+</div>

@@ -33,6 +33,14 @@ class LoadUser extends AbstractFixture implements OrderedFixtureInterface {
 
         $manager->persist($user);
 
+        $user->setNome("Beltrano Corretor")
+                ->setEmail("beltrano@teste.com")
+                ->setPassword("beltrano123")
+                ->setRole($corretor);
+
+        $manager->persist($user);
+
+
         $user = new User;
 
         $user->setNome("Arthur Admin")

@@ -49,10 +49,15 @@ class DadosCadConteudo
      */
     protected $updatedAt;
 
-        /**
+    /**
      * @ORM\Column(type="datetime", name="expires_at")
      */
     protected $expiresAt;
+
+    /**
+     * @ORM\Column(type="boolean", name="is_expired")
+     */
+    protected $isExpired;
     
 
     public function __construct($options = array())
@@ -61,6 +66,7 @@ class DadosCadConteudo
         (new Hydrator\ClassMethods)->hydrate($options, $this);
         $this->createdAt = new \DateTime("now");
         $this->updatedAt = new \DateTime("now");
+        $this->isExpired = false;
 
     }
 
@@ -68,11 +74,27 @@ class DadosCadConteudo
     {
         return array(
 			'id' => $this->id,
-			'slug' => $this->nome,
+			'slug' => $this->slug,
 			'categoria' => $this->categoria->getId(),
 			'criado_por'=>$this->criadoPor->getId(),
             'created_at'=> $this->createdAt,
             'updated_at'=> $this->updatedAt,
+            'is_expired' => $this->isExpired,
+            'expira_em' => $this->expiresAt,
+        );
+    }
+
+    public function toArrayForIndex()
+    {
+        return array(
+            'id' => $this->id,
+            'slug' => $this->slug,
+            'categoria' => $this->categoria->getNome(),
+            'criado_por'=>$this->criadoPor->getNome(),
+            'created_at'=> $this->createdAt,
+            'updated_at'=> $this->updatedAt,
+            'is_expired' => $this->isExpired,
+            'expira_em' => $this->expiresAt,
         );
     }
     
@@ -214,6 +236,30 @@ class DadosCadConteudo
     public function setExpiresAt($expiresAt)
     {
         $this->expiresAt = $expiresAt;
+
+        return $this;
+    }
+
+    /**
+     * Gets the value of isExpired.
+     *
+     * @return mixed
+     */
+    public function isExpired()
+    {
+        return $this->isExpired;
+    }
+
+    /**
+     * Sets the value of isExpired.
+     *
+     * @param mixed $isExpired the is expired
+     *
+     * @return self
+     */
+    public function setIsExpired($isExpired)
+    {
+        $this->isExpired = $isExpired;
 
         return $this;
     }

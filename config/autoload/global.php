@@ -13,15 +13,16 @@
 
 return array(
     'mail' => array(
-        'name' => 'smtp.googlemail.com',
-        'host' => 'smtp.googlemail.com',
+        'name' => 'localhost',
+        'host' => 'smtp.gmail.com',
+        'port' => 587,
         'connection_class' => 'login',
         'connection_config' => array(
             'username' => 'dnaloco@gmail.com',
-            'password' => '123',
+            'password' => 'artdna7',
             'ssl' => 'tls',
-            'port' => 587,
-            'from' => 'dnaloco@gmail.com'
+            'from'=> 'dnaloco@gmail.com'
+
         )
     )
 );

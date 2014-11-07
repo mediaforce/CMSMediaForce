@@ -1,6 +1,6 @@
 @charset "UTF-8";
-@import url("http://fonts.googleapis.com/css?family=Lato:300,400,700,900");
-@import url("http://fonts.googleapis.com/css?family=Pacifico");
+/*CSS file for fontawesome - an iconfont we will be using. This CSS file imported contains the font-face declaration. More info: http://fortawesome.github.io/Font-Awesome/ */
+@import url(http://thecodeplayer.com/uploads/fonts/fontawesome/css/font-awesome.min.css);
 /* line 347, ../bower_components/foundation/scss/foundation/components/_global.scss */
 meta.foundation-version {
   font-family: "/5.4.7/";
@@ -23429,23 +23429,80 @@ INDICE
 */
 /********************* 1 - Globals ********************************/
 /********************* 2 - Cabela├ºalho ****************************/
-/* line 73, ../scss/app.scss */
+/* line 74, ../scss/app.scss */
 #header-top-site {
   height: 150px;
 }
 
 /********************* 3 - Estrutura ******************************/
+/* line 79, ../scss/app.scss */
+div.editable {
+  border: solid 2px transparent;
+  padding-left: 15px;
+  padding-right: 15px;
+  border-color: #C4C4C4;
+  min-height: 50px;
+}
+/* line 88, ../scss/app.scss */
+div.editable::hover {
+  border-color: black;
+}
+
 /********************* 4 - Rodap├® *********************************/
-/* line 80, ../scss/app.scss */
+/* line 95, ../scss/app.scss */
 footer#rodape-principal {
   background: #0A0079;
   height: 200px;
+}
+
+/* line 100, ../scss/app.scss */
+#admin-content {
+  margin-left: 220px;
 }
 
 /********************* 5 - Estilo de T[itulos *********************/
 /********************* 6 - Estilo de Texto ************************/
 /********************* 7 - Bot├Áes *********************************/
 /********************* 8 - Navega├º├úo ******************************/
+/* line 111, ../scss/app.scss */
+#admin-menu {
+  width: 220px;
+  margin-top: 45px;
+  background: black;
+  height: 100vh;
+}
+/* line 118, ../scss/app.scss */
+#admin-menu h3 {
+  font-size: 1.4em;
+  color: white;
+}
+/* line 123, ../scss/app.scss */
+#admin-menu a {
+  color: white;
+}
+
+/* line 131, ../scss/app.scss */
+.menu-accordion ul {
+  list-style-type: none;
+}
+/* line 134, ../scss/app.scss */
+.menu-accordion ul h3 {
+  cursor: pointer;
+}
+/* line 138, ../scss/app.scss */
+.menu-accordion ul ul {
+  display: none;
+}
+/* line 141, ../scss/app.scss */
+.menu-accordion ul ul li a {
+  display: block;
+}
+/* line 147, ../scss/app.scss */
+.menu-accordion ul li.active ul {
+  display: block;
+}
+
 /********************* 9 - Formul├írios ****************************/
 /********************* 10 - Extras/Miscel├óneas ********************/
 /********************* 11 - Media Queries  ************************/
+/* Testes */
