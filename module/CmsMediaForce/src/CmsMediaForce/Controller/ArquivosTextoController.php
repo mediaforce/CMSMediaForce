@@ -25,23 +25,36 @@ class ArquivosTextoController extends CrudController {
         
         if($request->isPost())
         {
-            echo '<div style="padding: 220px;">';
 
-            
             $postArr = $request->getPost()->toArray();
-            var_dump($request->getFiles());
-            $categoria = $this->getEm()->getRepository('CmsMediaForce\Entity\Categoria', intval($postArr['categoria']) );
+            $file = $request->getFiles()->toArray()['arquivo'];
+            var_dump($file);
+            $categoria = $this->getEm()->find('CmsMediaForce\Entity\Categoria', intval($postArr['categoria']) );
             
-            var_dump($categoria->getNome());
+            $baseImg = 'public\img';
+            $folder = $baseImg . '\\' . \CmsBase\Helper\SlugHelper::slug($categoria->getNome());
 
-            $folder = \CmsBase\Helper\SlugHelper::slug($categoria->getNome());
-            echo "   CATEGORIA CATEGORIA CATEGORIA    =  ", $folder;
+            if (!is_dir($folder)) {
+                mkdir($folder);
+            }            
 
             $imageAdapter = new Zend_File_Transfer_Adapter_Http();
-            $imageAdapter->setDestination('public\img');
+            $imageAdapter->setDestination($folder);
 
+            if(is_uploaded_file($file['tmp_name'])){
+                if (!$imageAdapter->receive('arquivo')){
+                    $messages = $imageAdapter->getMessages['arquivo'];
+                    //A Imagem Não Foi Recebida Corretamente
+                }else{
+                    //Arquivo Enviado Com Sucesso
+                    //Realize As Ações Necessárias Com Os Dados
 
-            echo "</div>";
+                    $filename = $imageAdapter->getFileName('arquivo');
+                }
+            }else{
+                //O Arquivo Não Foi Enviado Corretamente
+            }
+
             die;
 
             $form->setData($request->getPost());
