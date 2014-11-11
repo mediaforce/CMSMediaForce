@@ -3,7 +3,7 @@
 <?php
 
 $form = $this->form;
-$form->setAttribute('action',$this->url('r2-admin-users/default',array('controller'=>'users','action'=>'edit')));
+$form->setAttribute('action',$this->url('cms-admin-access/default',array('controller'=>'users','action'=>'edit')));
 $form->prepare();
 
 echo $this->form()->openTag($form);

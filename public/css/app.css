@@ -23448,15 +23448,20 @@ div.editable::hover {
   border-color: black;
 }
 
+/* line 94, ../scss/app.scss */
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
 /********************* 4 - Rodap├® *********************************/
-/* line 95, ../scss/app.scss */
+/* line 98, ../scss/app.scss */
 footer#rodape-principal {
   background: #0A0079;
   height: 200px;
 }
 
-/* line 100, ../scss/app.scss */
-#admin-content {
+/* line 103, ../scss/app.scss */
+.admin-content {
   margin-left: 220px;
 }
 
@@ -23464,40 +23469,40 @@ footer#rodape-principal {
 /********************* 6 - Estilo de Texto ************************/
 /********************* 7 - Bot├Áes *********************************/
 /********************* 8 - Navega├º├úo ******************************/
-/* line 111, ../scss/app.scss */
+/* line 115, ../scss/app.scss */
 #admin-menu {
   width: 220px;
   margin-top: 45px;
   background: black;
   height: 100vh;
 }
-/* line 118, ../scss/app.scss */
+/* line 122, ../scss/app.scss */
 #admin-menu h3 {
   font-size: 1.4em;
   color: white;
 }
-/* line 123, ../scss/app.scss */
+/* line 127, ../scss/app.scss */
 #admin-menu a {
   color: white;
 }
 
-/* line 131, ../scss/app.scss */
+/* line 135, ../scss/app.scss */
 .menu-accordion ul {
   list-style-type: none;
 }
-/* line 134, ../scss/app.scss */
+/* line 138, ../scss/app.scss */
 .menu-accordion ul h3 {
   cursor: pointer;
 }
-/* line 138, ../scss/app.scss */
+/* line 142, ../scss/app.scss */
 .menu-accordion ul ul {
   display: none;
 }
-/* line 141, ../scss/app.scss */
+/* line 145, ../scss/app.scss */
 .menu-accordion ul ul li a {
   display: block;
 }
-/* line 147, ../scss/app.scss */
+/* line 151, ../scss/app.scss */
 .menu-accordion ul li.active ul {
   display: block;
 }
@@ -23506,3 +23511,82 @@ footer#rodape-principal {
 /********************* 10 - Extras/Miscel├óneas ********************/
 /********************* 11 - Media Queries  ************************/
 /* Testes */
+/* line 184, ../scss/app.scss */
+.features {
+  float: right;
+  width: 300px;
+  padding-left: 20px;
+}
+
+/* line 189, ../scss/app.scss */
+.features .heading {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* line 194, ../scss/app.scss */
+.drop {
+  padding: 15px;
+  border: 2px #f1f1f1 dashed;
+  border-radius: 5px;
+  line-height: 34px;
+}
+
+/* line 200, ../scss/app.scss */
+.drop.drag-over {
+  background: #5CB85C;
+  color: #fff;
+}
+
+/* line 204, ../scss/app.scss */
+.transfer-box {
+  margin-bottom: 5px;
+}
+
+/* line 207, ../scss/app.scss */
+.transfer-box .progress {
+  margin-bottom: 0;
+}
+
+/* line 211, ../scss/app.scss */
+.thumbnail {
+  line-height: 20px;
+  margin-bottom: 5px;
+  overflow: hidden;
+  word-break: normal;
+}
+
+/* line 217, ../scss/app.scss */
+.thumbnail img {
+  max-width: 200px;
+  max-height: 150px;
+}
+
+/* line 222, ../scss/app.scss */
+.gallery-box {
+  width: 200px;
+  padding: 5px;
+  margin: 7px;
+  float: left;
+  min-height: 200px;
+  border: 1px solid #ddd;
+  overflow: hidden;
+}
+
+/* line 231, ../scss/app.scss */
+.gallery-box .progress {
+  margin-bottom: 0;
+}
+
+/* line 234, ../scss/app.scss */
+.gallery-box .thumbnail {
+  height: 188px;
+  width: 188px;
+}
+
+/* line 238, ../scss/app.scss */
+.gallery-box .title {
+  height: 22px;
+  overflow: hidden;
+  display: block;
+}

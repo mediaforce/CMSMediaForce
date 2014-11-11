@@ -1,0 +1,8 @@
+<div ng-controller="CorretoresCtrl">
+
+	<div ng-show="loading">Carregando dados...</div>
+
+	<div ng-repeat="corretor in corretores">
+		Id: {{corretor.id}} | Descricao: {{corretor.descricao}}
+	</div>
+</div>

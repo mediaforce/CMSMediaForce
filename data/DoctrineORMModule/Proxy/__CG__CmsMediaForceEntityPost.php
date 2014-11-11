@@ -187,17 +187,6 @@ class Post extends \CmsMediaForce\Entity\Post implements \Doctrine\ORM\Proxy\Pro
     /**
      * {@inheritDoc}
      */
-    public function toArrayForIndex()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'toArrayForIndex', array());
-
-        return parent::toArrayForIndex();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     public function getId()
     {
         if ($this->__isInitialized__ === false) {

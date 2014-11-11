@@ -50,7 +50,7 @@ class DadosCadConteudo
     protected $updatedAt;
 
     /**
-     * @ORM\Column(type="datetime", name="expires_at")
+     * @ORM\Column(type="datetime", name="expires_at", nullable=true)
      */
     protected $expiresAt;
 
@@ -75,29 +75,14 @@ class DadosCadConteudo
         return array(
 			'id' => $this->id,
 			'slug' => $this->slug,
-			'categoria' => $this->categoria->getId(),
-			'criado_por'=>$this->criadoPor->getId(),
+			'categoria' => $this->categoria,
+			'criado_por'=>$this->criadoPor,
             'created_at'=> $this->createdAt,
             'updated_at'=> $this->updatedAt,
             'is_expired' => $this->isExpired,
             'expira_em' => $this->expiresAt,
         );
-    }
-
-    public function toArrayForIndex()
-    {
-        return array(
-            'id' => $this->id,
-            'slug' => $this->slug,
-            'categoria' => $this->categoria->getNome(),
-            'criado_por'=>$this->criadoPor->getNome(),
-            'created_at'=> $this->createdAt,
-            'updated_at'=> $this->updatedAt,
-            'is_expired' => $this->isExpired,
-            'expira_em' => $this->expiresAt,
-        );
-    }
-    
+    }    
 
     /**
      * Gets the value of id.

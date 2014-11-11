@@ -5,48 +5,51 @@
     <br />
 
     <p>
-        <a href="<?php echo $this->url('cms-admin-content/default',array('controller'=>'arquivostexto','action'=>'new')); ?>">Novo Arquivo</a>
+        <a href="<?php echo $this->url('cms-admin-content/default',array('controller'=>'arquivostexto','action'=>'new')); ?>" target="_self">Novo Arquivo</a>
     </p>
 
     <table class="table">
         <tr>
             <th>ID</th>
-            <th>Descricao</th>
+            <th>Categoria</th>
+            <th>Descrição</th>
             <th>Criado Em</th>
             <th>Atualizado Em</th>
             <th>Criado Por</th>
             <th>Expira Em</th>
+            <th>Arquivo</th>
             <td>Ação</td>
         </tr>
 
         <?php foreach($this->data as $entity): ?>
 
-        <?php $post = $entity->toArrayForIndex(); ?>
+        <?php $post = $entity->toArray(); ?>
 
         <tr>
         
             <td><?php echo $post['id']; ?></td>
             <td><?php echo $post['categoria']; ?></td>
-            <td><?php echo $post['titulo']; ?></td>
-            <td><?php echo $post['criado_em']->format('Y-m-d-H-i-s'); ?></td>
-            <td><?php echo $post['atualizado_em']->format('Y-m-d-H-i-s'); ?></td>
+            <td><?php echo $post['descricao']; ?></td>
+            <td><?php echo $post['criado_em']->format('d/m/Y H:i:s'); ?></td>
+            <td><?php echo $post['atualizado_em']->format('d/m/Y H:i:s'); ?></td>
             <td><?php echo $post['criado_por']; ?></td>
             <td>
                 <?php 
                 if ($post['expirar']):
-                    echo $post['expiresAt']->format('Y-m-d-H-i-s');
+                    echo $post['expiresAt']->format('d/m/Y H:i:s');
                 else:
                     echo 'Não Expira';
                 endif;
                  ?>
                 
             </td>
+            <td><a href="/<?php echo $post['endereco']; ?>"><?php echo basename($post['endereco']); ?></a></td>
             <td>
                 <a href="<?php echo $this->url('cms-admin-content/default',
-                        array('controller'=>'arquivostexto','action'=>'edit','id'=> $post['id'] ));?>">Editar</a>
+                        array('controller'=>'arquivostexto','action'=>'edit','id'=> $post['id'] ));?>" target="_self">Editar</a>
                 
                 <a href="<?php echo $this->url('cms-admin-content/default',
-                        array('controller'=>'arquivostexto','action'=>'delete','id'=> $post['id'] ));?>">Delete</a>
+                        array('controller'=>'arquivostexto','action'=>'delete','id'=> $post['id'] ));?>" target="_self">Delete</a>
                 
             </td>
         </tr>

@@ -15,12 +15,12 @@ class UsersController extends CrudController
         $this->form = "CmsMediaForce\Form\User";
         $this->service = "CmsMediaForce\Service\User";
         $this->controller = "users";
-        $this->route = "cms-admin";
+        $this->route = "cms-admin/default";
     }
- 
+
      public function editAction()
     {
-        $form = new $this->form();
+        $form = new $this->form();;
         $request = $this->getRequest();
         
         $repository = $this->getEm()->getRepository($this->entity);
@@ -37,6 +37,7 @@ class UsersController extends CrudController
         if($request->isPost())
         {
             $form->setData($request->getPost());
+
             if($form->isValid())
             {
                 $service = $this->getServiceLocator()->get($this->service);

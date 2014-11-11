@@ -21,11 +21,11 @@ if ($this->pageCount):
 
     <?php if (isset($this->previous)): ?>
 
-                <li><a href="<?php echo $formatUrl($this->previous); ?>">«</a></li>
+                <li><a href="<?php echo $formatUrl($this->previous); ?>" target="_self">«</a></li>
 
             <?php else: ?>
 
-                <li class="unavailable"><a href="#">«</a></li>
+                <li class="unavailable"><a href="#" target="_self">«</a></li>
 
             <?php endif; ?>
 
@@ -35,7 +35,7 @@ if ($this->pageCount):
 
                     <li>
 
-                        <a href="<?php echo $formatUrl($page); ?>"><?php echo $page; ?></a>
+                        <a href="<?php echo $formatUrl($page); ?>" target="_self"><?php echo $page; ?></a>
 
                     </li>                
 
@@ -43,7 +43,7 @@ if ($this->pageCount):
 
                     <li class="unavailable">
 
-                        <a href="#"><?php echo $page; ?></a>
+                        <a href="#" target="_self"><?php echo $page; ?></a>
 
                     </li>                
 
@@ -53,11 +53,11 @@ if ($this->pageCount):
 
             <?php if (isset($this->next)): ?>
 
-                <li><a href="<?php echo $formatUrl($this->next); ?>">»</a></li>
+                <li><a href="<?php echo $formatUrl($this->next); ?>" target="_self">»</a></li>
 
             <?php else: ?>
 
-                <li class="unavailable"><a href="#">»</a></li>
+                <li class="unavailable"><a href="#" target="_self">»</a></li>
 
             <?php endif; ?>
 

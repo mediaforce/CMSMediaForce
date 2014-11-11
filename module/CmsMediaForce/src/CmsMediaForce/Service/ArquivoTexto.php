@@ -23,13 +23,12 @@ class ArquivoTexto extends AbstractService
     {
         parent::__construct($em);
         
-        $this->entity = "CmsMediaForce\Entity\Post";
+        $this->entity = "CmsMediaForce\Entity\ArquivoTexto";
     }
     
     public function insert(array $data) {
         $auth = new AuthenticationService;
         $auth->setStorage(new SessionStorage('CmsUser'));
-
 
         if ( $auth->hasIdentity() ) {
             $entity = new $this->entity;
@@ -37,12 +36,12 @@ class ArquivoTexto extends AbstractService
             $categoria = $this->em->getReference('CmsMediaForce\Entity\Categoria', intval($data['categoria']));
             $usuario = $this->em->getReference('CmsMediaForce\Entity\User', intval($auth->getIdentity()->getId()));
 
-            $entity->setTitulo(ucwords($data['titulo']))
-                ->setConteudo($data['conteudo']);
+            $entity->setDescricao(ucwords($data['descricao']))
+                ->setEndereco($data['filename']);
 
             $dadosCad = new DadosCadConteudo;
 
-            $dadosCad->setSlug(SlugHelper::slug($entity->getTitulo()))
+            $dadosCad->setSlug(SlugHelper::slug($entity->getDescricao()))
                 ->setCategoria($categoria)
                 ->setCriadoPor($usuario);
 
@@ -50,10 +49,8 @@ class ArquivoTexto extends AbstractService
                 $data['expiresAt'] = \DateTime::createFromFormat('Y-m-d', $data['expiresAt']);
                 $dadosCad->setIsExpired(true)
                     ->setExpiresAt($data['expiresAt']);
-            } else {
-                $data['expiresAt'] = new \DateTime("now");
             }
-
+            
             $this->em->persist($dadosCad);
 
             $entity->setDadosCad($dadosCad);
@@ -80,12 +77,12 @@ class ArquivoTexto extends AbstractService
             $categoria = $this->em->getReference('CmsMediaForce\Entity\Categoria', intval($data['categoria']));
             $usuario = $this->em->getReference('CmsMediaForce\Entity\User', intval($auth->getIdentity()->getId()));
 
-            $entity->setTitulo(ucwords($data['titulo']))
-                ->setConteudo($data['conteudo']);
+            $entity->setDescricao(ucwords($data['descricao']))
+                ->setEndereco($data['filename']);
 
-            $dadosCad = $this->em->getReference('CmsMediaForce\Entity\DadosCadConteudo',$entity->getDadosCad()->getId());
+            $dadosCad = $this->em->getReference('CmsMediaForce\Entity\DadosCadConteudo', $entity->getDadosCad()->getId());
 
-            $dadosCad->setSlug(SlugHelper::slug($entity->getTitulo()))
+            $dadosCad->setSlug(SlugHelper::slug($entity->getDescricao()))
                 ->setCategoria($categoria)
                 ->setCriadoPor($usuario);
 
@@ -93,10 +90,8 @@ class ArquivoTexto extends AbstractService
                 $data['expiresAt'] = \DateTime::createFromFormat('Y-m-d', $data['expiresAt']);
                 $dadosCad->setIsExpired(true)
                     ->setExpiresAt($data['expiresAt']);
-            } else {
-                $data['expiresAt'] = new \DateTime("now");
             }
-
+            
             $this->em->persist($dadosCad);
 
             $entity->setDadosCad($dadosCad);

@@ -49,10 +49,20 @@ class ArquivoTexto
 
     public function toArray()
     {
-        return (new Hydrator\ClassMethods)->extract($this);
-    }
+        $dadosCad = $this->getDadosCad()->toArray();
 
-    
+        return array(
+            'id' => $this->id,
+            'categoria' => $dadosCad['categoria'],
+            'descricao' => $this->descricao,
+            'endereco' => $this->endereco,
+            'criado_em' => $dadosCad['created_at'],
+            'atualizado_em' => $dadosCad['updated_at'],
+            'criado_por' => $dadosCad['criado_por'],
+            'expirar' => $dadosCad['is_expired'],
+            'expiresAt' => $dadosCad['expira_em'],
+        );
+    }
 
     /**
      * Gets the value of id.
@@ -119,7 +129,7 @@ class ArquivoTexto
      *
      * @return self
      */
-    protected function setEndereco($endereco)
+    public function setEndereco($endereco)
     {
         $this->endereco = $endereco;
 

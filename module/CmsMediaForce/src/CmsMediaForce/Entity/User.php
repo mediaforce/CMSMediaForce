@@ -220,6 +220,13 @@ class User
         $this->createdAt = new \DateTime("now");
     }
 
+    public function __toString() {
+        if (is_null($this->nome)) {
+            return 'NULL';
+        }
+        return $this->nome;
+    }
+
     public function toArray()
     {
         return array(

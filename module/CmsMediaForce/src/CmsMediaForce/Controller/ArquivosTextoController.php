@@ -15,7 +15,7 @@ class ArquivosTextoController extends CrudController {
         $this->form = "CmsMediaForce\Form\ArquivoTexto";
         $this->service = "CmsMediaForce\Service\ArquivoTexto";
         $this->controller = "arquivostexto";
-        $this->route = "cms-admin-content";
+        $this->route = "cms-admin-content/default";
     }
 
     public function newAction()
@@ -25,14 +25,15 @@ class ArquivosTextoController extends CrudController {
         
         if($request->isPost())
         {
+            chdir('public');
 
             $postArr = $request->getPost()->toArray();
             $file = $request->getFiles()->toArray()['arquivo'];
-            var_dump($file);
+
             $categoria = $this->getEm()->find('CmsMediaForce\Entity\Categoria', intval($postArr['categoria']) );
             
-            $baseImg = 'public\img';
-            $folder = $baseImg . '\\' . \CmsBase\Helper\SlugHelper::slug($categoria->getNome());
+            $baseFile = 'files';
+            $folder = $baseFile . '\\' . \CmsBase\Helper\SlugHelper::slug($categoria->getNome());
 
             if (!is_dir($folder)) {
                 mkdir($folder);
@@ -42,30 +43,32 @@ class ArquivosTextoController extends CrudController {
             $imageAdapter->setDestination($folder);
 
             if(is_uploaded_file($file['tmp_name'])){
+
+
                 if (!$imageAdapter->receive('arquivo')){
+
                     $messages = $imageAdapter->getMessages['arquivo'];
+
                     //A Imagem Não Foi Recebida Corretamente
                 }else{
-                    //Arquivo Enviado Com Sucesso
-                    //Realize As Ações Necessárias Com Os Dados
 
                     $filename = $imageAdapter->getFileName('arquivo');
+
+                    $form->setData($request->getPost());
+
+                    if($form->isValid())
+                    {
+                        $service = $this->getServiceLocator()->get($this->service);
+                        $postArr['filename'] = $filename;
+
+                        $service->insert($postArr);
+                        
+                        return $this->redirect()->toRoute($this->route,array('controller'=>$this->controller));
+                    }
                 }
-            }else{
-                //O Arquivo Não Foi Enviado Corretamente
-            }
-
-            die;
-
-            $form->setData($request->getPost());
-
-            if($form->isValid())
-            {
-                $service = $this->getServiceLocator()->get($this->service);
-                $service->insert($request->getPost()->toArray());
-                
-                return $this->redirect()->toRoute($this->route,array('controller'=>$this->controller));
-            }
+            } else {
+                $form->isValid();
+            }          
 
         }
         
@@ -83,16 +86,56 @@ class ArquivosTextoController extends CrudController {
         if($this->params()->fromRoute('id',0))
             $form->setData($entity->toArray());
         
+        $form = $this->getServiceLocator()->get($this->form);
+        $request = $this->getRequest();
+        
         if($request->isPost())
         {
-            $form->setData($request->getPost());
-            if($form->isValid())
-            {
-                $service = $this->getServiceLocator()->get($this->service);
-                $service->update($request->getPost()->toArray());
-                
-                return $this->redirect()->toRoute($this->route,array('controller'=>$this->controller));
-            }
+            chdir('public');
+
+            $postArr = $request->getPost()->toArray();
+            $file = $request->getFiles()->toArray()['arquivo'];
+
+            $categoria = $this->getEm()->find('CmsMediaForce\Entity\Categoria', intval($postArr['categoria']) );
+            
+            $baseFile = 'files';
+            $folder = $baseFile . '\\' . \CmsBase\Helper\SlugHelper::slug($categoria->getNome());
+
+            if (!is_dir($folder)) {
+                mkdir($folder);
+            }            
+
+            $imageAdapter = new Zend_File_Transfer_Adapter_Http();
+            $imageAdapter->setDestination($folder);
+
+            if(is_uploaded_file($file['tmp_name'])){
+
+
+                if (!$imageAdapter->receive('arquivo')){
+
+                    $messages = $imageAdapter->getMessages['arquivo'];
+
+                    //A Imagem Não Foi Recebida Corretamente
+                }else{
+
+                    $filename = $imageAdapter->getFileName('arquivo');
+
+                    $form->setData($request->getPost());
+
+                    if($form->isValid())
+                    {
+                        $service = $this->getServiceLocator()->get($this->service);
+                        $postArr['filename'] = $filename;
+
+                        $service->update($postArr);
+                        
+                        return $this->redirect()->toRoute($this->route,array('controller'=>$this->controller));
+                    }
+                }
+            } else {
+                $form->isValid();
+            }          
+
         }
         
         return new ViewModel(array('form'=>$form));

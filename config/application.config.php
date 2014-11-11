@@ -5,6 +5,7 @@ return array(
         'CmsBase',
         'SiteApplication',
         'CmsMediaForce',
+        'CmsRest',
         'DoctrineModule',
         'DoctrineORMModule',
         'DoctrineDataFixtureModule',

@@ -1,0 +1,39 @@
+
+<form id="uploadForm" action="/upload/images" method="post">
+
+  <label>Upload Image File:</label><br/>
+
+  <input name="userImage" id="userImage" type="file" class="inputFile" />
+
+  <input type="submit" value="Submit" class="btnSubmit" />
+
+</form>
+
+<div id="visualizar"></div>
+
+
+ $("#uploadForm").on('submit',(function(e){
+
+            e.preventDefault();
+            $.ajax({
+              url: "/upload/images",
+              type: "POST",
+              data:  new FormData(this),
+              contentType: false,
+              cache: false,
+              processData:false,
+              success: function(data){
+                console.log('Success', data.html);
+                $("#visualizar").html(data.html);
+              },
+              error: function(data){
+                console.log('Error', data)
+              }           
+            });
+          }));
+
+          $('#userImage').change( function() { 
+            alert('changed');
+            $('#visualizar').html('<img src="/img/ajax-loader.gif" alt="Enviando..."/> Enviando...'); 
+            $('#uploadForm').submit();; 
+          });

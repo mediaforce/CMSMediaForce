@@ -151,7 +151,8 @@ return array(
             __NAMESPACE__ . '\Controller\Auth' => __NAMESPACE__ .  '\Controller\AuthController',
             __NAMESPACE__ . '\Controller\Posts' => __NAMESPACE__ .  '\Controller\PostsController',
             __NAMESPACE__ . '\Controller\ArquivosTexto' => __NAMESPACE__ .  '\Controller\ArquivosTextoController',
-
+            __NAMESPACE__ . '\Controller\Links' => __NAMESPACE__ .  '\Controller\LinksController',
+            __NAMESPACE__ . '\Controller\Corretores' => __NAMESPACE__ .  '\Controller\CorretoresController',
         ),
     ),
 

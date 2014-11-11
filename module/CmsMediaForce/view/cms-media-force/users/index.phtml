@@ -5,7 +5,7 @@
     <br />
 
     <p>
-        <a href="<?php echo $this->url('cms-admin-access/default',array('action'=>'new')); ?>">Novo</a>
+        <a href="<?php echo $this->url('cms-admin-access/default',array('action'=>'new')); ?>" target="_self">Novo</a>
     </p>
 
 
@@ -15,7 +15,6 @@
             <th>ID</th>
             <th>Nome</th>
             <th>Email</th>
-            <th>Tipo</th>
             <th>Ação</th>
         </tr>
 
@@ -28,13 +27,12 @@
             <td><?php echo $user['id']; ?></td>
             <td><?php echo $user['nome']; ?></td>
             <td><?php echo $user['email']; ?></td>
-            <td><?php echo $user['role']; ?></td>
             <td>
                 <a href="<?php echo $this->url('cms-admin-access/default',
-                        array('controller'=>'users','action'=>'edit','id'=>$entity->getId()));?>">Editar</a>
+                        array('controller'=>'users','action'=>'edit','id'=>$entity->getId()));?>" target="_self">Editar</a>
                 
                 <a href="<?php echo $this->url('cms-admin-access/default',
-                        array('controller'=>'users','action'=>'delete','id'=>$entity->getId()));?>">Delete</a>
+                        array('controller'=>'users','action'=>'delete','id'=>$entity->getId()));?>" target="_self">Delete</a>
                 
             </td>
         </tr>

@@ -26,6 +26,12 @@ class LoadCategoria extends AbstractFixture implements OrderedFixtureInterface {
             'Notificações',
         );
 
+        $catNone = array(
+            'Links',
+            'Corretores',
+            'Newsletters'
+        );
+
         foreach ($catOnlyPost as $cat) {
             $categoria = new Categoria;
             $categoria->setNome($cat)
@@ -50,6 +56,14 @@ class LoadCategoria extends AbstractFixture implements OrderedFixtureInterface {
                 ->setIsFile(true)
                 ->setIsPost(true);
                 
+            $manager->persist($categoria);
+            
+        }
+
+        foreach ($catNone as $cat) {
+            $categoria = new Categoria;
+            $categoria->setNome($cat);
+
             $manager->persist($categoria);
             
         }

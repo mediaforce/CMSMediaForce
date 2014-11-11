@@ -98,7 +98,6 @@ class Module
                 return new Form\Role('role',$parent);
               },
 
-
               'CmsMediaForce\Form\Post' => function($sm)
               {
                 $em = $sm->get('Doctrine\ORM\EntityManager');
@@ -143,6 +142,14 @@ class Module
 
               'CmsMediaForce\Service\Post' => function($sm){
                 return new Service\Post($sm->get('Doctrine\ORM\Entitymanager'));
+              },
+
+              'CmsMediaForce\Service\Link' => function($sm){
+                return new Service\Link($sm->get('Doctrine\ORM\Entitymanager'));
+              },
+
+              'CmsMediaForce\Service\ArquivoTexto' => function($sm){
+                return new Service\ArquivoTexto($sm->get('Doctrine\ORM\Entitymanager'));
               },
 
               'CmsMediaForce\Auth\Adapter' => function($sm)

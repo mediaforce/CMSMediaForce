@@ -9,7 +9,7 @@ use Zend\Stdlib\Hydrator;
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
  * @ORM\Table(name="links")
- * @ORM\Entity(repositoryClass="CmsMediaForce\Entity\ArquivoTextoRepository")
+ * @ORM\Entity(repositoryClass="CmsMediaForce\Entity\LinkRepository")
  */
 
 class Link 
@@ -34,12 +34,6 @@ class Link
      */
     protected $href;
 
-    /**
-     * @ORM\OneToOne(targetEntity="CmsMediaForce\Entity\DadosCadConteudo")
-     * @ORM\JoinColumn(name="dados_cad_id", referencedColumnName="id")
-     */
-    protected $dadosCad; 
-    
     public function __construct($options = array())
     {
         
@@ -69,7 +63,7 @@ class Link
      *
      * @return self
      */
-    protected function setId($id)
+    public function setId($id)
     {
         $this->id = $id;
 
@@ -93,7 +87,7 @@ class Link
      *
      * @return self
      */
-    protected function setDescricao($descricao)
+    public function setDescricao($descricao)
     {
         $this->descricao = $descricao;
 
@@ -117,36 +111,13 @@ class Link
      *
      * @return self
      */
-    protected function setHref($href)
+    public function setHref($href)
     {
         $this->href = $href;
 
         return $this;
     }
 
-    /**
-     * Gets the value of dadosCad.
-     *
-     * @return mixed
-     */
-    public function getDadosCad()
-    {
-        return $this->dadosCad;
-    }
-
-    /**
-     * Sets the value of dadosCad.
-     *
-     * @param mixed $dadosCad the dados cad
-     *
-     * @return self
-     */
-    protected function setDadosCad($dadosCad)
-    {
-        $this->dadosCad = $dadosCad;
-
-        return $this;
-    }
 }
 
 

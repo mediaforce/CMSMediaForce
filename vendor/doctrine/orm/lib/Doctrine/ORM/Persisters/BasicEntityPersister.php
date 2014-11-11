@@ -755,7 +755,7 @@ class BasicEntityPersister
         $hydrator = $this->em->newHydrator($this->selectJoinSql ? Query::HYDRATE_OBJECT : Query::HYDRATE_SIMPLEOBJECT);
         $entities = $hydrator->hydrateAll($stmt, $this->rsm, $hints);
 
-        return $entities ? $entities[0] : null;
+        return $entities ? $entities[0] : $entity;
     }
 
     /**

@@ -68,7 +68,12 @@ class Categoria
         );
     }
     
-
+    public function __toString() {
+        if (is_null($this->nome)) {
+            return 'NULL';
+        }
+        return $this->nome;
+    }
     /**
      * Gets the value of id.
      *

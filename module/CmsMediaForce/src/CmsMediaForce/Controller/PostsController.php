@@ -13,7 +13,7 @@ class PostsController extends CrudController {
         $this->form = "CmsMediaForce\Form\Post";
         $this->service = "CmsMediaForce\Service\Post";
         $this->controller = "posts";
-        $this->route = "cms-admin-content";
+        $this->route = "cms-admin-content/default";
     }
 
     public function newAction()

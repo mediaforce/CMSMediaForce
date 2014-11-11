@@ -114,8 +114,11 @@ class Role
         $this->createdAt = new \Datetime("now");
         return $this;
     }
-    
+
     public function __toString() {
+        if (is_null($this->nome)) {
+            return 'NULL';
+        }
         return $this->nome;
     }
     

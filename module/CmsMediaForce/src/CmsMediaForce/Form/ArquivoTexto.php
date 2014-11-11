@@ -10,7 +10,7 @@ class ArquivoTexto  extends Form
     public function __construct($name = 'arquivo-texto', array $categorias = null, $options = array()) {
         parent::__construct($name, $options);
         
-        $this->setInputFilter(new PostFilter());
+        $this->setInputFilter(new ArquivoTextoFilter());
         $this->setAttribute('method', 'post');
         
         $id = new \Zend\Form\Element\Hidden('id');

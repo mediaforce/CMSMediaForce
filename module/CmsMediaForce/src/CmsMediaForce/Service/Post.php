@@ -16,14 +16,11 @@ use CmsMediaForce\Entity\DadosCadConteudo;
 class Post extends AbstractService
 {
 
-    protected $transport;
-    protected $view;
-    
     public function __construct(EntityManager $em) 
     {
         parent::__construct($em);
         
-        $this->entity = "CmsMediaForce\Entity\ArquivoTexto";
+        $this->entity = "CmsMediaForce\Entity\Post";
     }
     
     public function insert(array $data) {
