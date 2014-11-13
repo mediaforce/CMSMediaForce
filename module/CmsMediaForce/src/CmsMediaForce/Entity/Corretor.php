@@ -27,6 +27,12 @@ class Corretor
      * @var string
      */
     protected $nome;
+
+    /**
+     * @ORM\Column(type="string")
+     * @var string
+     */
+    protected $area;
     
     /**
      * @ORM\Column(type="string")
@@ -35,13 +41,13 @@ class Corretor
     protected $cargo;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", unique=true)
      * @var string
      */
     protected $email;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      * @var string
      */
     protected $enderecoFoto;
@@ -49,21 +55,37 @@ class Corretor
     /**
      * @ORM\ManyToMany(targetEntity="CmsMediaForce\Entity\Telefone")
      * @ORM\JoinTable(name="corretor_telefones",
-     *      joinColumns={@ORM\JoinColumn(name="id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="id", referencedColumnName="id", unique=true)}
+     *      joinColumns={@ORM\JoinColumn(name="id_corretor", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="id_telefone", referencedColumnName="id", unique=true)}
      *      )
      **/
     protected $telefones;    
     
     public function __construct($options = array())
     {
-		
+		$this->telefones = new \Doctrine\Common\Collections\ArrayCollection();
         (new Hydrator\ClassMethods)->hydrate($options, $this);
     }
 
     public function toArray()
     {
-        return (new Hydrator\ClassMethods)->extract($this);
+        $telefones = $this->telefones;
+        $strTel = "";
+        foreach($telefones as $telefone) {
+            $tel = $telefone->toArray();
+
+            $strTel .= $tel['numero'] . ' ' . $tel['tipo'] . ',';
+        }
+
+        return [
+            'id' => $this->id,
+            'nome' => $this->nome,
+            'area' => $this->area,
+            'cargo' => $this->cargo,
+            'email' => $this->email,
+            'foto' => $this->enderecoFoto,
+            'telefones' => $strTel
+        ];
     }
 
     /**
@@ -110,6 +132,31 @@ class Corretor
     public function setNome($nome)
     {
         $this->nome = $nome;
+
+        return $this;
+    }
+
+
+    /**
+     * Gets the value of area.
+     *
+     * @return string
+     */
+    public function getArea()
+    {
+        return $this->area;
+    }
+
+    /**
+     * Sets the value of area.
+     *
+     * @param string $area the area
+     *
+     * @return self
+     */
+    public function setArea($area)
+    {
+        $this->area = $area;
 
         return $this;
     }
@@ -203,10 +250,11 @@ class Corretor
      *
      * @return self
      */
-    public function setTelefones($telefones)
+    public function addTelefone(Telefone $telefone)
     {
-        $this->telefones = $telefones;
+        $this->telefones[] = $telefone;
 
         return $this;
     }
+
 }

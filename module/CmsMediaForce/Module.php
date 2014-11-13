@@ -42,7 +42,7 @@ class Module
 
         $isAdmin = false;
 
-        if (strpos($matchedRoute,'cms-admin') !== false) {
+        if (strpos($matchedRoute,'admin') !== false) {
             $isAdmin = true;
         }
 
@@ -83,10 +83,14 @@ class Module
                 return $transport;
               },
 
-              'CmsMediaForce\Service\User' => function($sm) {
+              'CmsMediaForce\Service\User' => function ($sm) {
                   return new Service\User($sm->get('Doctrine\ORM\EntityManager'),
                                           $sm->get('CmsBase\Mail\Transport'),
                                           $sm->get('View'));
+              },
+
+              'CmsMediaForce\Service\Corretor' => function ($sm) {
+                  return new Service\Corretor( $sm->get('Doctrine\ORM\EntityManager') );
               },
 
               'CmsMediaForce\Form\Role' => function($sm)

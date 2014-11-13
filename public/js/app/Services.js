@@ -10,7 +10,8 @@ CmsApp.factory('Corretor', ['$resource', function ($resource) {
         	method: 'DELETE'
         },
         save: {
-        	method: 'POST'
+        	method: 'POST',
+            isArray: false 
         },
         query: {
         	method: 'GET', 

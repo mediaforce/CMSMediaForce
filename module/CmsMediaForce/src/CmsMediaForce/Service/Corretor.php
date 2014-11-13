@@ -6,26 +6,39 @@ use CmsBase\Service\AbstractService;
 use Doctrine\ORM\EntityManager;
 use Zend\Stdlib\Hydrator;
 
-class Role extends AbstractService
+class Corretor extends AbstractService
 {
 
     public function __construct(\Doctrine\ORM\EntityManager $em) {
         parent::__construct($em);
-        $this->entity = "R2Admin\Entity\Role";
+        $this->entity = "CmsMediaForce\Entity\Corretor";
     }
     
     public function insert(array $data)
     {
-        $entity = new $this->entity($data);
-        
-        if($data['parent'])
-        {
-            $parent = $this->em->getReference($this->entity, $data['parent']);
-            $entity->setParent($parent);
+        $entity = new $this->entity();
+
+        $entity->setNome($data['nome'])
+            ->setArea($data['area']['nome'])
+            ->setCargo($data['cargo']['nome'])
+            ->setEmail($data['email']);
+
+        if (isset($data['enderecoFoto'])) {
+            $entity->setEnderecoFoto( '/' . $data['enderecoFoto']);
         }
-        else 
-            $entity->setParent(null);
-        
+
+       foreach($data['telefones'] as $telefone) {
+            if ( is_array($telefone) && !empty($telefone['num']) ) {
+                $telEntity = new \CmsMediaForce\Entity\Telefone();
+                $telEntity->setNumero($telefone['num'])
+                    ->setTipo($telefone['tipo']['nome']);
+
+                $this->em->persist($telEntity);
+
+                $entity->addTelefone($telEntity);
+            }            
+        }
+
         $this->em->persist($entity);
         $this->em->flush();
         return $entity;

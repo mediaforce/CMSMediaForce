@@ -14,7 +14,7 @@ use Zend\Stdlib\Hydrator;
 
 class Telefone 
 {
-    protected $tiposPermitidos = array('telefone', 'celular', 'fax');
+
 
     /**
      * @ORM\Id
@@ -29,7 +29,10 @@ class Telefone
      */
     protected $numero;
     
-    /** @ORM\Column(type="string", columnDefinition="ENUM('telefone', 'celular', 'fax')") */
+    /**
+     * @ORM\Column(type="string") 
+     * @var string
+     */
     protected $tipo;
 
     public function __construct($options = array())
@@ -40,6 +43,10 @@ class Telefone
     public function toArray()
     {
         return (new Hydrator\ClassMethods)->extract($this);
+    }
+
+    public function __toString() {
+        return $this->numero;
     }
 
     /**
@@ -59,7 +66,7 @@ class Telefone
      *
      * @return self
      */
-    public function setId($id)
+    protected function setId($id)
     {
         $this->id = $id;
 
@@ -93,7 +100,7 @@ class Telefone
     /**
      * Gets the value of tipo.
      *
-     * @return mixed
+     * @return string
      */
     public function getTipo()
     {
@@ -103,21 +110,14 @@ class Telefone
     /**
      * Sets the value of tipo.
      *
-     * @param mixed $tipo the tipo
+     * @param string $tipo the tipo
      *
      * @return self
      */
     public function setTipo($tipo)
     {
-        if (!in_array($tipo, array('telefone', 'celular', 'fax'))) {
-            throw new \InvalidArgumentException("Invalid status");
-        }
         $this->tipo = $tipo;
 
         return $this;
-    }
-
-    public function getTiposPermitidos() {
-        return $this->tiposPermitidos;
     }
 }

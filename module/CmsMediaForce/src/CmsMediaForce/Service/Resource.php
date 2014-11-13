@@ -1,8 +1,8 @@
 <?php
 
-namespace R2Admin\Service;
+namespace CmsMediaForce\Service;
 
-use SONBase\Service\AbstractService;
+use CmsBase\Service\AbstractService;
 use Doctrine\ORM\EntityManager;
 
 class Resource extends AbstractService

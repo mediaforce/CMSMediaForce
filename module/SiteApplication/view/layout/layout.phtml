@@ -20,7 +20,9 @@
             ->appendFile($this->basePath() . '/bower_components/angular-resource/angular-resource.js')
             ->appendFile($this->basePath() . '/js/app/CmsApp.js')
             ->appendFile($this->basePath() . '/js/app/Services.js')
+            ->appendFile($this->basePath() . '/js/app/Directives.js')
             ->appendFile($this->basePath() . '/js/app/Controllers.js')
+            ->appendFile($this->basePath() . '/js/html5.image.preview.min.js')
             ->prependFile($this->basePath() . '/bower_components/foundation/js/foundation.js')
             ->prependFile($this->basePath() . '/js/jquery.min.js')
             ->prependFile($this->basePath() . '/js/respond.min.js', 'text/javascript', array('conditional' => 'lt IE 9',))
@@ -34,7 +36,7 @@
             <nav class="top-bar" data-topbar role="navigation">
               <!-- Title -->
               <ul class="title-area">
-                <li class="name"><h1><a href="/">Futura União Assessoria</a></h1></li>
+                <li class="name"><h1><a href="/" target="_self">Futura União Assessoria</a></h1></li>
 
                 <!-- Mobile Menu Toggle -->
                 <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
@@ -177,9 +179,9 @@
                         $etc = "...";
                       }
 
-                      echo '<a href="/admin" class="button">', $comprimento, substr($nome, 0, 20), $etc,'</a>';
+                      echo '<a href="/admin" class="button"  target="_self">', $comprimento, substr($nome, 0, 20), $etc,'</a>';
                     else:
-                      echo '<a href="/admin" class="button">Acesso Restrito</a>';
+                      echo '<a href="/admin" class="button"  target="_self">Acesso Restrito</a>';
                     endif;
                     ?>
                     
