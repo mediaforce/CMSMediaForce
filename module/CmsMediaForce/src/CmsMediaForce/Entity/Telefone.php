@@ -42,7 +42,10 @@ class Telefone
 
     public function toArray()
     {
-        return (new Hydrator\ClassMethods)->extract($this);
+        return [
+            'num' => $this->numero,
+            'tipo' => $this->tipo
+        ];
     }
 
     public function __toString() {

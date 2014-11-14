@@ -1,13 +1,15 @@
 CmsApp.factory('Corretor', ['$resource', function ($resource) {
 	return $resource('/api/corretores/:id', { id: '@_id'}, {
 		update: {
-			method: 'PUT'
+			method: 'PUT',
+            isArray: false,
+
 		},
 		get: {
-            method:'GET'
+            method:'GET',
         },
         delete: {
-        	method: 'DELETE'
+        	method: 'DELETE',
         },
         save: {
         	method: 'POST',

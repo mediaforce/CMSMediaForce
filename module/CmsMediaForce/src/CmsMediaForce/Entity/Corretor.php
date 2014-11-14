@@ -68,13 +68,11 @@ class Corretor
     }
 
     public function toArray()
-    {
-        $telefones = $this->telefones;
-        $strTel = "";
-        foreach($telefones as $telefone) {
-            $tel = $telefone->toArray();
+    {   
+        $tels = array();
 
-            $strTel .= $tel['numero'] . ' ' . $tel['tipo'] . ',';
+        foreach ($this->telefones as $tel) {
+            array_push( $tels, $tel->toArray());
         }
 
         return [
@@ -84,7 +82,7 @@ class Corretor
             'cargo' => $this->cargo,
             'email' => $this->email,
             'foto' => $this->enderecoFoto,
-            'telefones' => $strTel
+            'telefones' => $tels
         ];
     }
 
@@ -255,6 +253,16 @@ class Corretor
         $this->telefones[] = $telefone;
 
         return $this;
+    }
+
+    public function removeTelefone(Telefone $telefone) {
+        $this->telefones->removeElement($telefone);
+    }
+
+    public function removeAllTelefones() {
+        foreach( $this->telefones as $telefone) {
+            $this->removeTelefone($telefone);
+        }
     }
 
 }

@@ -30,8 +30,13 @@ class Corretor extends AbstractService
        foreach($data['telefones'] as $telefone) {
             if ( is_array($telefone) && !empty($telefone['num']) ) {
                 $telEntity = new \CmsMediaForce\Entity\Telefone();
-                $telEntity->setNumero($telefone['num'])
-                    ->setTipo($telefone['tipo']['nome']);
+                $telEntity->setNumero($telefone['num']);
+
+                if ( !empty( $telefone['tipo'] ) ) {
+                    $telEntity->setTipo($telefone['tipo']);
+                } else {
+                    $telEntity->setTipo('telefone');
+                }
 
                 $this->em->persist($telEntity);
 
@@ -41,24 +46,44 @@ class Corretor extends AbstractService
 
         $this->em->persist($entity);
         $this->em->flush();
+        
         return $entity;
     }
     
     public function update(array $data)
     {
         $entity = $this->em->getReference($this->entity, $data['id']);
-        (new Hydrator\ClassMethods())->hydrate($data, $entity);
         
-        if($data['parent'])
-        {
-            $parent = $this->em->getReference($this->entity, $data['parent']);
-            $entity->setParent($parent);
+        $entity->setNome($data['nome'])
+            ->setArea($data['area']['nome'])
+            ->setCargo($data['cargo']['nome'])
+            ->setEmail($data['email'])
+            ->removeAllTelefones();
+
+        if (isset($data['enderecoFoto'])) {
+            $entity->setEnderecoFoto( '/' . $data['enderecoFoto']);
         }
-        else 
-            $entity->setParent(null);
-        
+
+       foreach($data['telefones'] as $telefone) {
+            if ( is_array($telefone) && !empty($telefone['num']) ) {
+                $telEntity = new \CmsMediaForce\Entity\Telefone();
+                $telEntity->setNumero($telefone['num']);
+
+                if ( !empty( $telefone['tipo'] ) ) {
+                    $telEntity->setTipo($telefone['tipo']);
+                } else {
+                    $telEntity->setTipo('telefone');
+                }
+
+                $this->em->persist($telEntity);
+
+                $entity->addTelefone($telEntity);
+            }            
+        }
+
         $this->em->persist($entity);
         $this->em->flush();
+        
         return $entity;
     }
 }

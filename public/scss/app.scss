@@ -1,4 +1,46 @@
 // Minhas Fonts
+@font-face {
+	font-family: 'icomoon';
+	src:url('/fonts/iconmoon/icomoon.eot?-cbettd');
+	src:url('/fonts/iconmoon/icomoon.eot?#iefix-cbettd') format('embedded-opentype'),
+		url('/fonts/iconmoon/icomoon.woff?-cbettd') format('woff'),
+		url('/fonts/iconmoon/icomoon.ttf?-cbettd') format('truetype'),
+		url('/fonts/iconmoon/icomoon.svg?-cbettd#icomoon') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+	font-family: 'icomoon';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.icon-uniE603:before {
+	content: "\e603";
+}
+.icon-uniE604:before {
+	content: "\e604";
+}
+.icon-phone:before {
+	content: "\e601";
+}
+.icon-mobile:before {
+	content: "\e602";
+}
+.icon-search:before {
+	content: "\e600";
+}
+
+
 /*CSS file for fontawesome - an iconfont we will be using. This CSS file imported contains the font-face declaration. More info: http://fortawesome.github.io/Font-Awesome/ */
 @import url(http://thecodeplayer.com/uploads/fonts/fontawesome/css/font-awesome.min.css);
 
@@ -94,6 +136,15 @@ div.editable {
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
 	display: none !important;
 }
+
+#fotoCorretor {
+	margin: auto;
+	max-width: 200px;
+	max-height: 200px;
+	border: 2px solid black;
+	box-shadow: -2px 2px 3px #43453A;
+}
+
 /********************* 4 - Rodapé *********************************/
 footer#rodape-principal {
 	background: #0A0079; 

@@ -16,7 +16,9 @@
 
         <!-- Scripts -->
         <?php echo $this->headScript()
+            ->appendFile($this->basePath() . '/js/plugins/blockui-master/jquery.blockUI.js')
             ->appendFile($this->basePath() . '/bower_components/angular/angular.js')
+            ->appendFile($this->basePath() . '/bower_components/angular-route/angular-route.js')
             ->appendFile($this->basePath() . '/bower_components/angular-resource/angular-resource.js')
             ->appendFile($this->basePath() . '/js/app/CmsApp.js')
             ->appendFile($this->basePath() . '/js/app/Services.js')
@@ -583,10 +585,6 @@
             $(".active").removeClass("active").addClass("inactive");
             $(this).removeClass("inactive").addClass("active");
           });
-
-         
-
-
 
         });
 

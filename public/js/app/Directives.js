@@ -55,11 +55,11 @@ CmsApp.directive('ensureUnique', ['$http', '$parse', function($http, $parse) {
           url: '/api/checkemail',
           data: {'id': scope.corretor.id, 'email': scope.corretor.email}
         }).success(function(data, status, headers, cfg) {
-            console.log(data)
+
           c.$setValidity('unique', data.isUnique);
           scope.showErroUnique = true;
         }).error(function(data, status, headers, cfg) {
-            console.log(data)
+
           c.$setValidity('unique', false);
         });
       });

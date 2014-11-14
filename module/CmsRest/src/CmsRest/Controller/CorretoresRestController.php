@@ -13,7 +13,7 @@ class CorretoresRestController extends AbstractRestfulController {
     {
 
         $em = $this->getServiceLocator()->get("Doctrine\ORM\EntityManager");
-        $repo = $em->getRepository("CmsMediaForce\Entity\Corretor");
+        $repo = $em->getRepository('CmsMediaForce\Entity\Corretor');
         
         $data = $repo->findArray();
 
@@ -24,8 +24,9 @@ class CorretoresRestController extends AbstractRestfulController {
     // Retornar o registro especifico - GET
     public function get($id)
     {
+
         $em = $this->getServiceLocator()->get("Doctrine\ORM\EntityManager");
-        $repo = $em->getRepository("CmsMediaForce\Entity\Link");
+        $repo = $em->getRepository('CmsMediaForce\Entity\Corretor');
         
         $data = $repo->find($id)->toArray();
         
@@ -36,7 +37,6 @@ class CorretoresRestController extends AbstractRestfulController {
     // Insere registro - POST
     public function create($data)
     {
-        $result = false;
 
         if (isset($data['foto']) && !empty($data['foto'])) {
             $result = $this->saveImage($data['foto'], $data['email']);
@@ -50,19 +50,22 @@ class CorretoresRestController extends AbstractRestfulController {
             if ($data) {
                 $corretor = $corretorService->insert($data);
 
-                if ($corretor) {
-                    return new JsonModel(array('data'=>array('id'=>$corretor->getId(),'success'=>true, 'data' => $data )));
+                if ($corretor->getId() > 0) {
+                    return new JsonModel(array('data'=>array('id'=>$corretor->getId(),'success'=>true, 'corretor' => $corretor->toArray() )));
                 } else {
-                    return new JsonModel(array('data'=>array('success'=>false, 'data' => $data )));
+                    return new JsonModel(array('data'=>array('success'=>false, 'erro' => 'não foi possível gerar ID')));
                 }
             
             } else {
-                return new JsonModel(array('data'=>array('success'=>false, 'data' => $data )));
+                return new JsonModel(array('data'=>array('success'=>false, 'erro' => 'a data veio mal formatada')));
             }
         } catch (\Exception $e) {
-            $erro = "deu erro";
+            ob_start();
+            echo $e->getMessage();
+            $erro = ob_get_contents();
+            ob_end_clean();
         }
-        return new JsonModel(array('data'=>array('success'=>false, 'data' => $data )));
+        return new JsonModel(array('data'=>array('success'=>false, 'erro' => $erro)));
     }
     
     private function saveImage($base64img, $nome){
@@ -84,7 +87,34 @@ class CorretoresRestController extends AbstractRestfulController {
     // alteracao - PUT
     public function update($id, $data)
     {
-        return new JsonModel(array('data'=>'update'));
+        if (isset($data['foto']) && !empty($data['foto'])) {
+            $result = $this->saveImage($data['foto'], $data['email']);
+            $data['enderecoFoto'] = $result ;
+        }
+        $erro = "";
+
+        try {
+            $corretorService = $this->getServiceLocator()->get('CmsMediaForce\Service\Corretor');
+
+            if ($data) {
+                $corretor = $corretorService->update($data);
+
+                if ( $corretor->getId() == $id ) {
+                    return new JsonModel(array('data'=>array('id'=>$id,'success'=>true, 'corretor' => $corretor->toArray() )));
+                } else {
+                    return new JsonModel(array('data'=>array('success'=>false, 'erro' => 'não foi possível gerar ID')));
+                }
+            
+            } else {
+                return new JsonModel(array('data'=>array('success'=>false, 'erro' => 'a data veio mal formatada')));
+            }
+        } catch (\Exception $e) {
+            ob_start();
+            echo $e->getMessage();
+            $erro = ob_get_contents();
+            ob_end_clean();
+        }
+        return new JsonModel(array('data'=>array('success'=>false, 'erro' => $erro)));
     }
     
     // delete - DELETE
